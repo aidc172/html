@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comtoper</title>
+    <link rel="shortcut icon" href="lc.ico" type="image/x-icon" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: linear-gradient(
+          200deg,
+          #51fff0,
+          #44caff,
+          #982aff,
+          #ffe45a
+        );
+        overflow: hidden;
+      }
+      .flex {
+        display: flex;
+      }
+      .shu {
+        flex-direction: column;
+      }
+      .juzhong {
+        justify-content: center;
+        align-items: center;
+      }
+      .queding {
+        color:#000000;
+        text-decoration: none;
+      }
+      .anniu {
+        margin: 2px;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 40px;
+        border-radius:10px;
+        font-weight:bold;
+        border:1px solid #0a787d;
+        font-size:20px;
+        background: linear-gradient(200deg, #aac6f0,#94e2fc,#83b9e1);
+        cursor: pointer;
+        transition: 1s;
+      }
+      .anniu:hover {
+        transition: 0.5s;
+        background: linear-gradient(-200deg, #aac6f0,#94e2fc,#83b9e1);
+        background-position-x: -60px;
+        box-shadow: 0px 3px 13px #000000;
+      }
+      .shuru {
+        border: none;
+        border-radius: 10px;
+        width: 150px;
+        height: 45px;
+        margin-left:10px;
+        font-weight: bold;
+        outline: none;
+        padding-left: 5px;
+        /*过渡动画*/
+        transition: 1s;
+        z-index: 3;
+      }
+      .shuru:hover {
+        height: 45px;
+        transition: 0.5s;
+        box-shadow: 0px 5px 50px;
+        width: 250px;
+      }
+      .hengfu {
+        padding: 10px;
+        height: 50px;
+        background-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0px 0px 30px 5px;
+      }
+      .biaoti {
+        padding: 5px;
+        align-items: center;
+        transition: 1s
+      }
+      .gundong {
+        border-radius:10px;
+        height: 40px;
+        width: 50px;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        box-shadow: 0px 2px 20px 1px #0a787d;
+      }
+      @media (max-width: 600px) {
+        .biaoti {
+          display:none;
+        }
+        .zuobian {
+          display:none;
+        }
+        .neirong::-webkit-scrollbar {
+          display: none;
+        }
+      }
+      .zuobian {
+        background-color: rgba(255, 255, 255, 0.192);
+        width: 200px;
+        height: 100vh;
+      }
+      .youbian {
+        background-color: rgba(255, 255, 255, 0.5);
+        margin: 10px 10px 0px;
+        height: 100vh;
+        width:max-content;
+        border-radius:10px 10px 0px 0px;
+        box-shadow:0px 5px 15px;
+      }
+      .toubu {
+        margin:10px;
+        height:70px;
+        padding:5px;
+        font-weight:bold;
+        border-radius:10px;
+        background-image: linear-gradient(to right top, #5096ff, #8d9eff, #b6a8ff, #d6b4ff, #f0c1ff);
+        box-shadow:0px 5px 20px #006873;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transition: 1s;
+        /*元素可点击*/
+        cursor: pointer;
+        color: #000000;
+      }
+      .dianji {
+        text-decoration: none;
+        color:#000000;
+        cursor: pointer;
+      }
+      .toubu:hover {
+        box-shadow: none;
+        transition: 0.5s;
+      }
+      .neirong {
+        height:100vh;
+        margin-top:5px;
+        border-radius: 10px;
+        padding:8px;
+        background-color:rgba(255, 255, 255, 0.3);
+        box-shadow: 0px 3px 20px #006873;
+        overflow: auto;
+      }
+      .dingwei {
+        align-items: center;
+        font-weight:bold;
+        background-color: #f5e3fb;
+        border-radius:8px;
+        height:40px;
+        padding-left: 5px;
+      }
+      .zhenwen {
+        font-size:11px;
+        padding:5px;
+        background-color: rgba(255, 255, 255, 0.2);
+        margin: 0px 5px;
+        letter-spacing: 2px;
+        line-height: 20px;
+      }
+      .dengru {
+        font-weight: bold;
+        margin: 10px;
+        border-radius: 10px;
+        transition: 1s;
+      }
+      .dengru:hover {
+        box-shadow:0px 3px 20px;
+        height: 45px;
+        transition: 0.5s;
+        background-image: linear-gradient(230deg, #5096ff, #8d9eff, #b6a8ff, #f0c1ff);
+      }
+      .zuoce {
+        display: flex;
+        height: 45px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        color: #000000;
+      }
+      .yanse {
+        color: #d66f00;
+        font-size: 120%;
+        padding-left: 10px;
+      }
+    </style>
+  </head>
+  <body class="shu">
+    <!--网站横幅-->
+    <div style="z-index: 1;align-items: center;" class="hengfu flex">
+      <div style="flex: 2;margin-right:40px;" class="flex biaoti">
+        <img src="024.png" width="60px" height="60px">
+        <div style="margin-left:5px"><b>SCP-079</b> 收容中心</div>
+        <img style="margin-left:5px" src="d5.png" width="25px height=25px">
+      </div>
+      <div style="flex: 2;align-items: center;" class="flex">
+        <a class="queding" href="https://the-scp.foundation/">
+          <div class="anniu flex">确定</div>
+        </a>
+        <input class="shuru" placeholder="请输入您的问题 &#8629;">
+      </div>
+      <div style="flex: 1" class="flex gundong">
+        <marquee style="font-weight: bold;">
+          这里是SCP基金会分支的项目收容计划中心，只针对编号为079的AI程序（旧AI），暂不对其它出逃的超自然体进行收容。
+        </marquee>
+      </div>
+    </div>
+    <!--主内容区-->
+    <div class="flex">
+      <!--左区-->
+      <div style="z-index: 2" class="zuobian shu flex shu">
+        <div style="margin-top:20px;" class="dengru">
+        <a style="text-decoration: none;" href="https://b4k9s5.neocities.org/">
+        <div class="zuoce">前往登入界面</div>
+        </a>
+        </div>
+        <div class="dengru">
+        <a style="text-decoration: none;" href="https://space.bilibili.com/34786453" target="_blank">
+        <div class="zuoce">教程知识来源</div>
+        </a>
+        </div>
+        <div class="dengru">
+        <a style="text-decoration: none;" href="https://space.bilibili.com/7850779" target="_blank">
+        <div class="zuoce">哔哩哔哩主页</div>
+        </a>
+        </div>
+        <div class="dengru">
+        <a style="text-decoration: none;" href="https://neocities.org/" target="_blank">
+        <div class="zuoce">免费服务器站</div>
+        </a>
+        </div>
+      </div>
+      <!--右区-->
+      <div style="flex: 1;z-index: 1;" class="youbian flex shu">
+        <!--导航条-->
+        <div class="flex">
+          <a style="flex:1;" class="dianji" href="#diyi">
+          <div class="toubu flex">
+              指令翻译
+            </div>
+          </a>
+          <a style="flex:1;" class="dianji" href="#dier">
+          <div class="toubu flex">
+              词组用法
+            </div>
+          </a>
+          <a style="flex:1;" class="dianji"  href="#disan">
+          <div class="toubu flex">
+              长句解析
+            </div>
+          </a>
+          <a style="flex:1;" class="dianji" href="#disi">
+            <div class="toubu flex">
+              其它分类
+            </div>
+          </a>
+          <a style="flex:1;" class="dianji" href="https://b4k9s5.neocities.org/compoter.html">
+            <div class="toubu flex">
+              返回主页
+            </div>
+          </a>
+        </div>
+        <!--内容区-->
+        <div style="flex: 1;" class="flex shu neirong">
+          <div class="dingwei flex" id="diyi">指令翻译</div>
+          <div class="zhenwen">
+            style:"写入以下代码"<br>
+            <b class="yanse">* {}:</b> 给当前所有元素添加指令<br>
+            <b class="yanse">/:</b> 引入文件夹下级文件(同级目录就写名字)<br>
+            <b class="yanse">../:</b> 引入文件夹上级文件<br>
+            <b class="yanse">ctrl+/:</b> 启用和关闭一段代码（也可用于一键添加注释符号）<br>
+            <b class="yanse">&amp;lt; :</b> &lt;（小于号）<br>
+            <b class="yanse">&amp;gt; :</b> &gt;（大于号）<br>
+            <b class="yanse">&amp;nbsp; :</b> &nbsp;（空格、空字符）<br>
+            <b class="yanse">&amp;amp; :</b> &amp;（和号）<br>
+            <b class="yanse">auto:</b> 自动<br>
+            <b class="yanse">align:</b> 对齐<br>
+            <b class="yanse">br:</b> 分段<br>
+            <b class="yanse">blur:</b> 模糊(朦胧；用于元素背景的模糊效果)<br>
+            <b class="yanse">border:</b> 墙<br>
+            <b class="yanse">background:</b> 背景<br>
+            <b class="yanse">background-color:</b> 背景颜色(文本颜色)<br>
+            <b class="yanse">background-image:</b> 背景颜色(背景图片)<br>
+            <b class="yanse">border-radius:</b> 倒角<br>
+            <b class="yanse">block:</b> 块<br>
+            <b class="yanse">background:url()</b> 根据路径指定当前元素背景的图片<br>
+            <b class="yanse">background:var()</b> 引用当前页面元素指定当前背景样式<br>
+            <b class="yanse">box-shadow:</b> 盒子的阴影效果<br>
+            <b class="yanse">button:</b> 按钮<br>
+            <b class="yanse">class:</b> 属性<br>
+            <b class="yanse">center:</b> 居中<br>
+            <b class="yanse">content:</b> 内容<br>
+            <b class="yanse">cover</b> 覆盖<br>
+            <b class="yanse">color:</b> 颜色<br>
+            <b class="yanse">container:</b> 容器（箱子）<br>
+            <b class="yanse">row:</b> 行（控制横向）<br>
+            <b class="yanse">column:</b> 列（控制竖向）<br>
+            <b class="yanse">div:</b> 大盒子（布局容器，没有语义，一个盒子单独占用整行，允许在里面添加span标签）<br>
+            <b class="yanse">span:</b> 小盒子（布局容器，没有语义，只占用本身大小的像素面积，一行可存在多个盒子）<br>
+            <b class="yanse">direction:</b> 方向（控制盒子主轴方向）<br>
+            <b class="yanse">animation:</b> 动画（动画效果）<br>
+            <b class="yanse">del：</b>文本<del>删除</del>标记(与s标签同理，这个语义更强，可搭配css)<br>
+            <b class="yanse">ins:</b> <ins>下划线</ins>（和u标签同理，这个语义更强，可搭配css）<br>
+            <b class="yanse">strong:</b> 字体<b>加粗</b>（和b标签同理，这个语义更强，可搭配css）<br>
+            <b class="yanse">display:</b> 显示为<br>
+            <b class="yanse">em:</b> <em>倾斜</em><br>
+            <b class="yanse">flex:</b> 软体（弹性盒子）<br>
+            <b class="yanse">float:</b> 漂浮（浮动）<br>
+            <b class="yanse">fixed:</b> 固定<br>
+            <b class="yanse">font-size:</b> 字体大小<br>
+            <b class="yanse">flex:1</b> 占满当前盒子全部空间（flex:2 占满剩余空间的2/3）<br>
+            <b class="yanse">gradinet:</b> 渐变（梯度）<br>
+            <b class="yanse">hr：</b>隔离线<br>
+            <b class="yanse">hidden:</b>隐藏<br>
+            <b class="yanse">height:</b> 高度<br>
+            <b class="yanse">width:</b> 宽度<br>
+            <b class="yanse">items:</b> 项目<br>
+            <b class="yanse">img:</b> 图像标签<br>
+            <b class="yanse">inherit:</b> 继承（一般用于子对象继承分对象的设定值）<br>
+            <b class="yanse">loop:</b> 循环<br>
+            <b class="yanse">max-width:</b> 最大宽度<br>
+            <b class="yanse">min-width:</b> 最小宽度<br>
+            <b class="yanse">marquee:</b> 控制元素滚动显示的指令<br>
+            <b class="yanse">margin:</b> 墙外围宽度<br>
+            <b class="yanse">movement:</b> 移动<br>
+            <b class="yanse">overflow:</b> 溢出（超出）<br>
+            <b class="yanse">position:</b> 位置<br>
+            <b class="yanse">padding:</b> 墙内围宽度<br>
+            <b class="yanse">placeholder:</b> 占位符（一般用于input指令内输入框的文字）<br>
+            <b class="yanse">repeat:</b> 重复<br>
+            <b class="yanse">start:</b> 起点<br>
+            <b class="yanse">end:</b> 结尾<br>
+            <b class="yanse">select:</b> 选项(选项卡)<br>
+            <b class="yanse">style:</b> 样式（风格、方式）<br>
+            <b class="yanse">stretch:</b> 拉伸（伸缩、伸展）<br>
+            <b class="yanse">scroll:</b> 滚动<br>
+            <b class="yanse">shadow:</b> 阴影<br>
+            <b class="yanse">bottom:</b> 底部（对齐末尾）<br>
+            <b class="yanse">top:</b> 顶部（对齐开头）<br>
+            <b class="yanse">transition:</b>过渡（一般用于动画移动的时间）<br>
+            <b class="yanse">decoration:</b>效果（显示效果）<br>
+            <b class="yanse">transparent:</b> 透明(一般用于background下的透明效果)<br>
+            <b class="yanse">up down left right:</b> 上下左右<br>
+          </div>
+          <div class="dingwei flex" id="dier">词组用法</div>
+          <div class="zhenwen">
+            style:"写入以下代码"<br>
+            <b class="yanse">align-items:stretch</b> 拉伸并使当前元素垂直居中<br>
+            <b class="yanse">align-items:center</b> 使当前元素垂直方向居中<br>
+            <b class="yanse">justify-content:center</b> 使当前元素水平方向居中<br>
+            <b class="yanse">text-items:center</b> 使当前文字垂直方向居中<br>
+            <b class="yanse">justify-content:flex-start</b> 盒子下级元素对齐内容为弹性起点<br>
+            <b class="yanse">a href="#mz" id=mz</b> 点击跳转到di为mz的位置<br>
+            <b class="yanse">a name="anchorName" id="anchorName"</b>a标签的锚点前往以id为标记的锚点<br>
+            <b class="yanse">background:linear-gradient {to right red,green,balck}</b> 背景颜色为从左到右的红绿黑线性渐变<br>
+            <b class="yanse">background:linear-gradient {200deg red,green,balck}</b> 背景颜色为200度旋转的红绿黑线性渐变<br>
+            <b class="yanse">align-items:flex-end</b> 拉伸并使当前盒子对齐尾部<br>
+            <b class="yanse">border:5px solid red</b> 红色的墙厚5个像素<br>
+            <b class="yanse">background-size:cover</b> 背景大小为覆盖当前元素<br>
+            <b class="yanse">background-position-x:</b> 背景沿x轴移动位置<br>
+            <b class="yanse">box-sizing:border-box</b> 绝对面积（不会因为内部占用而扩大盒子总面积。<br>
+            <b class="yanse">backdrop-filter: blur(5px)</b> 当前元素的背景模糊5个像素<br>
+            <b class="yanse">box-sizing:center-box</b>默认值（内部占用加上边框宽度从而改变盒子面积）<br>
+            <b class="yanse">opacity: 0.5</b> 当前元素透明值为0.5（影响元素透明度）<br>
+            <b class="yanse">background:rgba (255，255，255，0.5)</b> 当前元素透明值为0.5（不影响元素透明度）<br>
+            <b class="yanse">background-color: transparent</b> 当前背景为透明<br>
+            <b class="yanse">display:block</b> 当前元素为块（将当前元素改为盒子）<br>
+            <b class="yanse">display:none</b> 不显示当前盒子<br>
+            <b class="yanse">display:flex</b> 当前元素为弹性容器<br>
+            <b class="yanse">float:right</b> 使当前元素靠近右边<br>
+            <b class="yanse">font-weight:bold</b> 文字为粗体<br>
+            <b class="yanse">height:100vh</b> 100%的视图高度<br>
+            <b class="yanse">width:100vw</b> 100%的视图宽度<br>
+            <b class="yanse">letter-spacing:5px</b> 文字以5个像素隔开<br>
+            <b class="yanse">line-height: 15px</b> 文字以15个像素隔开<br>
+            <b class="yanse">box-shadow:0px 0px 10px 0px</b> 阴影的左右偏移 上下偏移 阴影深度 阴影范围<br>
+            <b class="yanse">margin-top: 10px</b> 当前元素的外墙顶部宽度为10个像素<br>
+            <b class="yanse">margin: 10px 20px</b> 当前元素的外墙厚度上下为10个像素，左右为20个像素<br>
+            <b class="yanse">overflow:auto</b> 内容显示方式为自动<br>
+            <b class="yanse">overflow:hidden</b> 内容超出容器时隐藏<br>
+            <b class="yanse">overflow:scroll</b> 内容超出容器时滚动显示<br>
+            <b class="yanse">position:absolute</b> 绝对定位(用该指令的容器可以放在页面任何位置，宽高距离对比为页面位置)<br>
+            <b class="yanse">position:fixed</b> 固定定位(用该指令的容器将固定在设定位置，不会跟随页面的滚动而移动位置)<br>
+            <b class="yanse">position:relative</b> 相对定位(用该指令的容器对于默认位置移动，该指令下使用left:20px则对比默认位置向左增加20个像素)<br>
+            <b class="yanse">text-decoration:none</b> 下划线:无<br>
+            <b class="yanse">target="_blank</b> 用于网页以新标签打开<br>
+            <b class="yanse">z-index:1</b> Z轴层为第1层<br>
+          </div>
+          <div class="dingwei flex" id="disan">长句解析</div>
+          <div class="zhenwen">
+            <b class="yanse">&lt;button type="button" autofocus onclick="alert('bq')"&gt;mz&lt;/button&gt;</b><br>
+            给当前元素添加点击属性，点击“mz”弹出bq对话框<br>
+            <b class="yanse">&lt;img src="123.jpg" alt="图片未找到" title="图片" width="50px" height="50px"&gt;</b><br>
+            当前位置插入一张名为123的图片，未成功加载时显示替换文本:“图片未找到”，鼠标悬浮时显示文本：图片，宽度为50个像素，高度为50个像素。<br>
+            <b class="yanse">&lt;a style="color: black; text-decoration: none;" herf="baidu.com" target="_blank"&gt;百度&lt;/a&gt;</b><br>
+            当前位置插入一个字体颜色为黑色，没有下划线，打开新标签的一个百度网站，点击“百度”打开。<br>
+            <b class="yanse">
+              @media （max-width: 600px）{<br>
+               .bz{display:none}<br>
+               .bz{flex-direction:column}<br>
+              } </b><br>
+            当满足屏幕最大宽度小于600的条件时，<br>
+            带bz标签的盒子则不显示,<br>
+            带bz标签的元素内容将已列的方式显示。<br>
+            <b class="yanse">
+              &lt;marquee width="100px" bgcolor="red" direction="right" behavior="alternate" scrollamount="100"<br>
+              style="font-weight:bold;color:black" onmouseover="this.stop()" onmouseout="this.start()"&gt;123&lt;/marquee&gt;</b><br>
+            将文本123滚动显示，文本框范围宽度为100个像素，背景颜色为红色；滚动方向为右边，动作为左右循环,滚动速度为100，<br>
+            文本字体为粗体，文字字体为黑色，鼠标悬浮时停止滚动，鼠标离开时继续滚动。<br>
+            <b class="yanse">
+            &lt;link rel="shortcut icon" href="mz.ico" type="image/x-icon" /&gt;</b><br>
+            网页图标引用当前文件夹下名为mz的图片<br>
+            <b class="yanse">
+            &lt;link rel="stylesheet" href="style.css&gt;</b><br>
+            网页css引用当前文件夹下名为style的css文件<br>
+            <b class="yanse">
+            animation: 6s movement linear infinite</b><br>
+            动画线性移动的时间为6秒，范围无限<br>
+            <b class="yanse">
+            .mz:hover {width:100px; background: linear-gradient: (100deg,#000000,#ffffff); transition:1s; }</b><br>
+            当鼠标悬浮在mz标签上的元素时，当前元素宽度变动为100个像素，背景变动为100度旋转的黑白渐变色的背景，变动的过渡时长为1秒。<br>
+            <b class="yanse">box-shadow: 0px 5px 20px 5px #000000</b><br>
+            当前元素的阴影上下偏移为5个像素，左右偏移为0个像素素，阴影深度为20个像素，阴影范围为5个像素，阴影的颜色为黑色<br>
+            <b class="yanse">background-image:url(mz.jpg) no-repeat center center</b><br>
+            背景为一张名为mz的图片，以水平居中 垂直居中的方式重复平铺当前元素，如果为repeat-x则为水平方向重复铺满当前元素，no-repeat则不重复。<br>
+          </div>
+          <div class="dingwei flex" id="disi">其它分类</div>
+          <div class="zhenwen">
+            待完善区域<br>
+            待完善区域<br>
+            待完善区域<br>
+            待完善区域<br>
+            待完善区域<br>
+            待完善区域<br>
+            待完善区域<br>
+            待完善区域<br>
+            待完善区域<br>
+            待完善区域<br>
+          </div>
+        </div>
+      </div>
+  </body>
+  </html>
